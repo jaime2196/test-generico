@@ -1,0 +1,19 @@
+[{
+    "id": 0,
+    "titulo": "PSD",
+    "subtitulo": "Profesional Scrum developer",
+    "preguntas": [{
+        "id": 0,
+        "tipo": "RADIO",
+        "titulo": "Título asdas da sdasd asdasd asdf sdfgdfgdfg df gd gdzfgzd fgzdf gdfg zdf g(Solo una opcion correcta)",
+        "opciones": [{
+            "id": 0,
+          "opcion": "Cero"
+        },
+        {
+          "id": 1,
+          "opcion": "Uno"
+        }],
+        "solucion": [0]
+      }]
+}]
