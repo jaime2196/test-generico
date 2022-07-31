@@ -8,13 +8,17 @@ import { TestPageComponent } from './page/test-page/test-page.component';
 import { TestComponent } from './component/test/test.component';
 import { AddpreguntaPageComponent } from './page/addpregunta-page/addpregunta-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { InicioPageComponent } from './page/inicio-page/inicio-page.component';
+import { AddtestPageComponent } from './page/addtest-page/addtest-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TestPageComponent,
     TestComponent,
-    AddpreguntaPageComponent
+    AddpreguntaPageComponent,
+    InicioPageComponent,
+    AddtestPageComponent
   ],
   imports: [
     BrowserModule,

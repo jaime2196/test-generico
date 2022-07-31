@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AddpreguntaPageComponent } from './page/addpregunta-page/addpregunta-page.component';
+import { AddtestPageComponent } from './page/addtest-page/addtest-page.component';
+import { InicioPageComponent } from './page/inicio-page/inicio-page.component';
 import { TestPageComponent } from './page/test-page/test-page.component';
 
 const routes: Routes = [
-  { path: '**', component: AppComponent },
-  {path: 'test/:id', component: TestPageComponent}
+  { path:'', component: InicioPageComponent },
+  { path:'nuevotest', component: AddtestPageComponent },
+  { path: 'modificartest/:id', component: AddpreguntaPageComponent },
+  { path: 'test/:id', component: TestPageComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

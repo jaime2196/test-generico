@@ -8,7 +8,12 @@ import { TestModelo } from 'src/app/model/TestModelo';
 })
 export class TestPageComponent implements OnInit {
 
-  test: TestModelo | undefined;
+  test: TestModelo= {
+    id:0,
+    titulo: 'Ejemplo',
+    subtitulo: 'Ejemplo',
+    preguntas: [],
+  };
   constructor() { }
 
   ngOnInit(): void {

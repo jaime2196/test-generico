@@ -1,4 +1,4 @@
-<p>hola</p>
-
-<h1>{{test.titulo}</h1>
-<h2>{{test.subtitulo}</h2>
+<h1>{{test.titulo}}</h1>
+<h2>{{test.subtitulo}}</h2>
+<hr>
+<app-test *ngFor="let pregunta of test.preguntas" [pregunta]="pregunta"></app-test>

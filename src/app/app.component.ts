@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   constructor(private httpClient: HttpClient, private router: Router){}
 
   ngOnInit(): void {
-    this.depurar();
+    //this.depurar();
   }
 
 
@@ -31,5 +31,7 @@ export class AppComponent implements OnInit {
     this.router.navigate([`test/${test.id}`]);
     console.log(test);
   }
+
+
   
 }

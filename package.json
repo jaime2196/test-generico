@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "bot": "ng g c ./page/addpregunta-page",
+    "bot": "ng g c ./page/addtest-page",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -22,7 +22,9 @@
     "@angular/router": "^14.0.0",
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.10.2",
+    "@types/jquery": "^3.5.14",
     "bootstrap": "^5.2.0",
+    "jquery": "^3.6.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

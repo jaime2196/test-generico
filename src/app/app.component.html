@@ -7,12 +7,18 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Inicio</a>
+          <a class="nav-link" routerLink="/">Inicio</a>
         </li>
-        <li *ngFor="let test of tests" class="nav-item">
-          <a class="nav-link" (click)="goPage(test)">{{test.titulo}}</a>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/nuevotest" routerLinkActive="active">Crear nuevo test</a>
         </li>
+        <!--<li *ngFor="let test of tests" class="nav-item">
+          <a class="nav-link" routerLink="/test/{{test.id}}" routerLinkActive="active">{{test.titulo}}</a>
+        </li>-->
       </ul>
     </div>
   </nav>
+  <div class="m-4">
+    <router-outlet></router-outlet>
+  </div>
 </div>
