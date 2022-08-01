@@ -1,6 +1,6 @@
 <div class="card m-4" >
     <div class="card-body">
-      <h5 class="card-title">{{ pregunta.titulo }}</h5>
+      <h5 class="card-title">{{pregunta.id}} - {{ pregunta.titulo }}</h5>
       <h6 class="card-subtitle mb-2 text-muted">{{ subtitulo }}</h6>
       <div *ngIf="pregunta.tipo == 'RADIO'"><!-- RADIO BUTTONS -->
         <div  *ngFor="let opcion of pregunta.opciones" class="form-check">
@@ -12,7 +12,7 @@
       </div>
       <div *ngIf="pregunta.tipo == 'CHECK'"> <!-- CHECK BOX BUTTONS -->
         <div *ngFor="let opcion of pregunta.opciones" class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="{{pregunta.id}}-{{opcion.id}}">
+            <input class="form-check-input" type="checkbox" value="{{opcion.id}}" id="{{pregunta.id}}-{{opcion.id}}" >
             <label class="form-check-label" for="{{pregunta.id}}-{{opcion.id}}">
                 {{opcion.opcion}}
             </label>

@@ -10,6 +10,7 @@ import { AddpreguntaPageComponent } from './page/addpregunta-page/addpregunta-pa
 import { HttpClientModule } from '@angular/common/http';
 import { InicioPageComponent } from './page/inicio-page/inicio-page.component';
 import { AddtestPageComponent } from './page/addtest-page/addtest-page.component';
+import { RuntestPageComponent } from './page/runtest-page/runtest-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AddtestPageComponent } from './page/addtest-page/addtest-page.component
     TestComponent,
     AddpreguntaPageComponent,
     InicioPageComponent,
-    AddtestPageComponent
+    AddtestPageComponent,
+    RuntestPageComponent
   ],
   imports: [
     BrowserModule,
