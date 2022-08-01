@@ -17,9 +17,14 @@
 
     <br>
     <div *ngIf="mostrarResultado" class="col text-center">
-        <h6>Resultados</h6>
-        <div *ngFor="let resultado of resultados">
-            {{procesarResultado(resultado)}}
-        </div>
+        <h4>Resultados</h4>
+        <h5 class="text-info">Estadisticas</h5>
+        <div [innerHTML]="textoEstadisticasSafe"></div>
+        <br>
+        <h5 class="text-success">Aciertos ({{getAciertos().length}})</h5>
+        <div [innerHTML]="textoAciertosSafe"></div>
+        <br><br>
+        <h5 class="text-danger">Fallos ({{getFallos().length}})</h5>
+        <div [innerHTML]="textoFallosSafe"></div>
     </div>
 </div>

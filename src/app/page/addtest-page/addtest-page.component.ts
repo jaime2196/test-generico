@@ -59,4 +59,24 @@ export class AddtestPageComponent implements OnInit {
     return testModelo;
   }
 
+  importar(){
+    let files = $('#fichero').prop('files');
+    if(files.length>0){
+      let fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        if (typeof fileReader.result === 'string') {
+          let res = fileReader.result;
+          this.guardarEnStorage(res);
+        }
+        console.log(fileReader.result);
+      }
+      fileReader.readAsText(files[0]);
+    }
+  }
+
+  guardarEnStorage(testStr: string){
+    let test: TestModelo = JSON.parse(testStr);
+    StorageService.setTest(test);
+  }
+
 }

@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { InicioPageComponent } from './page/inicio-page/inicio-page.component';
 import { AddtestPageComponent } from './page/addtest-page/addtest-page.component';
 import { RuntestPageComponent } from './page/runtest-page/runtest-page.component';
+import { SaniticeHtmlPipe } from './pipe/sanitice-html.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RuntestPageComponent } from './page/runtest-page/runtest-page.component
     AddpreguntaPageComponent,
     InicioPageComponent,
     AddtestPageComponent,
-    RuntestPageComponent
+    RuntestPageComponent,
+    SaniticeHtmlPipe
   ],
   imports: [
     BrowserModule,

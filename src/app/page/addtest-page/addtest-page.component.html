@@ -16,7 +16,11 @@
 </div>
 
 <div class="col text-center">
-    <hr>
-    <button type="button" (click)="anadirPreguntas()" class="btn btn-primary">Añadir preguntas</button>&nbsp;
     <button type="button" (click)="guardar()" class="btn btn-primary">Guardar</button>
+    <hr>
+    <p>O prueba a importarlo desde un fichero JSON:</p>
+    <input type="file" id="fichero">
+    <button type="button" (click)="importar()" class="btn btn-primary">Importar</button>
 </div>
+
+
