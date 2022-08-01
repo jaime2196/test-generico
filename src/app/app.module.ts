@@ -12,6 +12,10 @@ import { InicioPageComponent } from './page/inicio-page/inicio-page.component';
 import { AddtestPageComponent } from './page/addtest-page/addtest-page.component';
 import { RuntestPageComponent } from './page/runtest-page/runtest-page.component';
 import { SaniticeHtmlPipe } from './pipe/sanitice-html.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EliminarTestComponent } from './dialog/eliminar-test/eliminar-test.component';
+import { IniciarTestComponent } from './dialog/iniciar-test/iniciar-test.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +26,15 @@ import { SaniticeHtmlPipe } from './pipe/sanitice-html.pipe';
     InicioPageComponent,
     AddtestPageComponent,
     RuntestPageComponent,
-    SaniticeHtmlPipe
+    SaniticeHtmlPipe,
+    EliminarTestComponent,
+    IniciarTestComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule, 
-    HttpClientModule
+    HttpClientModule, BrowserAnimationsModule, MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

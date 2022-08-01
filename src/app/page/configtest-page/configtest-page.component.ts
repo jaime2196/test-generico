@@ -4,6 +4,8 @@ import { TestModelo } from 'src/app/model/TestModelo';
 import { StorageService } from 'src/app/service/storageService';
 import * as $ from 'jquery';
 import { saveAs } from 'file-saver';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { EliminarTestComponent } from 'src/app/dialog/eliminar-test/eliminar-test.component';
 
 @Component({
   selector: 'app-test-page',
@@ -13,7 +15,7 @@ import { saveAs } from 'file-saver';
 export class TestPageComponent implements OnInit {
 
   test: TestModelo= this.encontrarTest();
-  constructor(private router:Router) { }
+  constructor(private router:Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     $(()=>{
@@ -41,4 +43,16 @@ export class TestPageComponent implements OnInit {
     saveAs(blob, `TESTS-${this.test.id}.json`);
   }
 
+  eliminarTest(){
+    this.dialog.open(EliminarTestComponent, {
+      width: '250px',
+      data: {
+        dataKey: this.test
+      }
+    });
+  }
+
 }
+
+
+

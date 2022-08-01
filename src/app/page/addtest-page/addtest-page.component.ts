@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as $ from 'jquery';
 import { TestModelo } from 'src/app/model/TestModelo';
 import { StorageService } from 'src/app/service/storageService';
@@ -12,7 +13,7 @@ export class AddtestPageComponent implements OnInit {
 
   tests: TestModelo[]=[] ;
 
-  constructor(){ 
+  constructor(private router: Router){ 
   }
 
   ngOnInit(): void {
@@ -68,7 +69,7 @@ export class AddtestPageComponent implements OnInit {
           let res = fileReader.result;
           this.guardarEnStorage(res);
         }
-        console.log(fileReader.result);
+        //console.log(fileReader.result);
       }
       fileReader.readAsText(files[0]);
     }
@@ -77,6 +78,7 @@ export class AddtestPageComponent implements OnInit {
   guardarEnStorage(testStr: string){
     let test: TestModelo = JSON.parse(testStr);
     StorageService.setTest(test);
+    this.router.navigate(['/']);
   }
 
 }

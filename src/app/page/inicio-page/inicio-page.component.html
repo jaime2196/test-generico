@@ -7,8 +7,8 @@
         <div class="card-body">
           <h5 class="card-title">{{test.titulo}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{test.subtitulo}}</h6>
-          <p class="card-text">El test contiene {{test.preguntas.length}} preguntas</p>
-          <a  routerLink="/test/{{test.id}}" class="card-link">Iniciar Test</a>
+          <p class="card-text">El test contiene {{test.preguntas.length}} preguntas.</p>
+          <a (click)="iniciarTest(test)" class="card-link">Iniciar Test</a>
           <a routerLink="/modificartest/{{test.id}}" class="card-link">Añadir preguntas</a>
           <a routerLink="/configtest/{{test.id}}" class="card-link">Configurar test</a>
         </div>

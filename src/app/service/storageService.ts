@@ -36,4 +36,8 @@ export class StorageService{
         localStorage.setItem(`TESTS-${test.id}`, JSON.stringify(test));
     }
 
+    public static eliminarTest(test: TestModelo){
+        localStorage.removeItem(`TESTS-${test.id}`);
+    }
+
 }
