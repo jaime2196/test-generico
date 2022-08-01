@@ -4,13 +4,14 @@
     <input type="file">
 </div>
 <div *ngIf="tests.length>0">
-    <div *ngFor="let test of tests" class="card mb-2" style="width: 18rem;">
+    <div *ngFor="let test of tests" class="card mb-2" style="width: 22rem;">
         <div class="card-body">
           <h5 class="card-title">{{test.titulo}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{test.subtitulo}}</h6>
           <p class="card-text">El test contiene {{test.preguntas.length}} preguntas</p>
           <a  routerLink="/test/{{test.id}}" class="card-link">Iniciar Test</a>
           <a routerLink="/modificartest/{{test.id}}" class="card-link">Modificar test</a>
+          <a routerLink="/configtest/{{test.id}}" class="card-link">Configurar test</a>
         </div>
       </div>
 </div>

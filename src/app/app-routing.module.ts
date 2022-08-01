@@ -5,13 +5,14 @@ import { AddpreguntaPageComponent } from './page/addpregunta-page/addpregunta-pa
 import { AddtestPageComponent } from './page/addtest-page/addtest-page.component';
 import { InicioPageComponent } from './page/inicio-page/inicio-page.component';
 import { RuntestPageComponent } from './page/runtest-page/runtest-page.component';
-import { TestPageComponent } from './page/test-page/test-page.component';
+import { TestPageComponent } from './page/configtest-page/configtest-page.component';
 
 const routes: Routes = [
   { path:'', component: InicioPageComponent },
   { path:'nuevotest', component: AddtestPageComponent },
   { path: 'modificartest/:id', component: AddpreguntaPageComponent },
-  { path: 'test/:id', component: RuntestPageComponent }
+  { path: 'test/:id', component: RuntestPageComponent },
+  { path: 'configtest/:id', component: TestPageComponent }
 ];
 
 @NgModule({
