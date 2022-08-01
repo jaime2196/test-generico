@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { TestModelo } from 'src/app/model/TestModelo';
+import { StorageService } from 'src/app/service/storageService';
 
 @Component({
   selector: 'app-addtest-page',
@@ -15,16 +16,8 @@ export class AddtestPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initTests();
+    this.tests = StorageService.initTests();
   }
-
-  initTests(){
-    let testsStr = localStorage.getItem('TESTS');
-    if(testsStr!=null){
-      this.tests=JSON.parse(testsStr);
-    }
-  }
-
 
   anadirPreguntas(){
     this.guardar();
@@ -37,19 +30,11 @@ export class AddtestPageComponent implements OnInit {
     let safeTitulo = titulo==undefined?'':titulo.toString();
     let sub = $('#subtitulo').val();
     let safeSub =  sub==undefined?'':sub.toString();
-    let id =0;
-    if(this.tests.length!=0){
-      id = this.getSiguienteId();
-      let nuevoTest = this.getTestModelo(safeTitulo, safeSub, id);
-      this.tests.push(nuevoTest);
-      localStorage.setItem('TESTS', JSON.stringify(this.tests));
-    }else{
-      let listaTest: TestModelo[] = [];
-      let nuevoTest = this.getTestModelo(safeTitulo, safeSub, id);
-      listaTest.push(nuevoTest);
-      localStorage.setItem('TESTS', JSON.stringify(listaTest));
-    }
-    this.initTests();
+    let id =this.getSiguienteId();
+    let nuevoTest = this.getTestModelo(safeTitulo, safeSub, id);
+    //localStorage.setItem(`TESTS-${id}`, JSON.stringify(nuevoTest));
+    StorageService.setTest(nuevoTest);
+    this.tests = StorageService.initTests();
     console.log('Guardado con exito')
   }
 

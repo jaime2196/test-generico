@@ -1,16 +1,16 @@
-<div *ngIf="tests==undefined">
+<div *ngIf="tests.length==0">
     <p>No se ha encontrado ningun test</p>
     <p>Prueba a <a routerLink="/nuevotest">crear un nuevo test</a> o a importarlo desde una fichero json</p>
     <input type="file">
 </div>
-<div *ngIf="tests!=undefined">
+<div *ngIf="tests.length>0">
     <div *ngFor="let test of tests" class="card mb-2" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">{{test.titulo}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{test.subtitulo}}</h6>
           <p class="card-text">El test contiene {{test.preguntas.length}} preguntas</p>
           <a  class="card-link">Iniciar Test</a>
-          <a routerLink="/modificartest/test.id" class="card-link">Modificar preguntas</a>
+          <a routerLink="/modificartest/{{test.id}}" class="card-link">Modificar preguntas</a>
         </div>
       </div>
 </div>

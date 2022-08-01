@@ -1,1 +1,115 @@
-<p>addpregunta-page works!</p>
+<div *ngIf="test.id == -1">
+    <p>El test no existe</p>
+</div>
+
+
+<div *ngIf="test.id != -1" class="col">
+    <h3>Modificar test: {{test.titulo}}</h3>
+    <h5>{{test.subtitulo}}</h5>
+    <br>
+    <!-- Titulo pregunta -->
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Titulo de la pregunta</span>
+        </div>
+        <input type="text" id="titulopregunta" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+
+    <!-- Tipo pregunta -->
+    <div class="form-check">
+        <input class="form-check-input" type="radio" (click)="changeTipoPregunta(preguntaTipo.RADIO)" name="tipopregunta" id="radiotiporadio" value="RADIO">
+        <label class="form-check-label" for="radiotiporadio">
+            Solo una respuesta correcta
+        </label>
+        <br>
+        <input class="form-check-input" type="radio" (click)="changeTipoPregunta(preguntaTipo.CHECK)" name="tipopregunta" id="radiotipocheck" value="CHECK">
+        <label class="form-check-label" for="radiotipocheck">
+            Varias respuestas correctas
+        </label>
+    </div>
+    <br>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Opcion</span>
+        </div>
+        <input type="text" id="opcion" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        &nbsp;
+        <button type="button" (click)="anadirOpcion()" class="btn btn-primary">Añadir opcion</button>
+    </div>
+    <br>
+    <div *ngIf="pregunta.opciones.length==0" class="col text-center">
+        <p>(Esta pregunta no tiene opciones todavia)</p>
+    </div>
+
+    <!-- Tabla -->
+    <div *ngIf="pregunta.opciones.length!=0" class="col text-center">
+        <h6>Opciones</h6>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Opcion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let opcion of pregunta.opciones">
+                <td>{{ opcion.id }}</td>
+                <td>{{ opcion.opcion }}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+    <!-- Tipo pregunta -->
+    <div *ngIf="mostrarTipoPregunta && pregunta.opciones.length!=0">
+        <div *ngIf="pregunta.tipo==preguntaTipo.RADIO">
+            <p>Selecciona la opcion correcta</p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">Opcion correcta</label>
+                </div>
+                <select style="width:auto;" class="custom-select" id="selectRadio">
+                  <option selected>Elige...</option>
+                  <option *ngFor="let opcion of pregunta.opciones" value="{{opcion.id}}">{{opcion.id}}-{{opcion.opcion}}</option>
+                </select>
+              </div>
+        </div>
+
+        <div *ngIf="pregunta.tipo==preguntaTipo.CHECK">
+            <p>Selecciona las opciones correctas</p>
+            <div *ngFor="let opcion of pregunta.opciones" class="form-check">
+                <input class="form-check-input check-opciones" type="checkbox" value="{{opcion.id}}" id="{{pregunta.id}}-{{opcion.id}}">
+                <label class="form-check-label" for="{{pregunta.id}}-{{opcion.id}}">
+                    {{opcion.opcion}}
+                </label>
+              </div>
+        </div>
+    </div>
+
+    <!-- Guardar -->
+    <div class="col text-center">
+        <hr>
+        <button type="button" (click)="guardarPregunta()" class="btn btn-primary">Guardar</button>
+    </div>
+
+</div>
+
+
+<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+    <!-- Position it -->
+    <div style="position: absolute; top: 0; right: 0;">
+    <!-- Then put toasts within -->
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="mr-auto">Aviso</strong>
+          <small class="text-muted">justo ahora</small>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">
+          {{msgToast}}
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TestModelo } from 'src/app/model/TestModelo';
+import { StorageService } from 'src/app/service/storageService';
 
 @Component({
   selector: 'app-inicio-page',
@@ -8,21 +9,16 @@ import { TestModelo } from 'src/app/model/TestModelo';
 })
 export class InicioPageComponent implements OnInit {
 
-  tests: TestModelo[] | undefined;
+  tests: TestModelo[] = StorageService.initTests();
 
-  constructor() { 
-    this.initTests();
+  constructor() {
+     
   }
 
   ngOnInit(): void {
     
   }
 
-  initTests(){
-    let testsStr = localStorage.getItem('TESTS');
-    if(testsStr!=null){
-      this.tests=JSON.parse(testsStr);
-    }
-  }
+  
 
 }
