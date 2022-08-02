@@ -1,3 +1,4 @@
+import { Estadistica } from "./Estadistica";
 import { Opciones } from "./Opciones";
 
 export interface Pregunta{
@@ -8,7 +9,7 @@ export interface Pregunta{
     titulo: string;
     opciones: Opciones[];
     solucion: number[];
-    
+    estadistica: Estadistica;
 
     /*constructor(titulo:string, opciones: Opciones[], solucion: number[]){
         this.titulo=titulo;

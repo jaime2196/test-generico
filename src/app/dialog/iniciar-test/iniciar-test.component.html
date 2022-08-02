@@ -1,6 +1,38 @@
 <h1 mat-dialog-title>Iniciar test</h1>
 <div mat-dialog-content>
   Configura el test antes de inciarlo:
+  <br><br>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">Número de preguntas</span>
+    </div>
+    <input type="number" id="npreguntas" min="1" max="{{test.preguntas.length}}" value="{{test.preguntas.length}}" class="form-control" placeholder="" aria-label="Número de preguntas" aria-describedby="basic-addon1">
+  </div>
+  <!-- Radios -->
+  Orden de las preguntas:
+  <div  class="form-check">
+    <div *ngFor="let test of tipoDeTests | keyvalue">
+      <input class="form-check-input" type="radio" name="tipo-test" id="{{test.key}}" value="{{test.value}}">
+      <label class="form-check-label" for="{{test.key}}">
+        {{test.value}}
+      </label>
+      <br>
+    </div>
+    <!--<input class="form-check-input" type="radio" name="tipo-test" id="aleatorio" value="aleatorio">
+    <label class="form-check-label" for="aleatorio">
+      Preguntas aleatorias
+    </label>
+    <br>
+    <input class="form-check-input" type="radio" name="tipo-test" id="menos" value="menos">
+    <label class="form-check-label" for="menos">
+      Preguntas que salen menos
+    </label>
+    <br>
+    <input class="form-check-input" type="radio" name="tipo-test" id="falladas" value="falladas">
+    <label class="form-check-label" for="falladas">
+      Preguntas más falladas
+    </label>-->
+  </div>
   
 </div>
 <div mat-dialog-actions>

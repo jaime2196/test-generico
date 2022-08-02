@@ -29,6 +29,7 @@ export class RuntestPageComponent implements OnInit {
   constructor(private router: Router, private domSanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+    console.log(history.state.data);
   }
 
 

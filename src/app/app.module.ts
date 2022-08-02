@@ -14,6 +14,7 @@ import { RuntestPageComponent } from './page/runtest-page/runtest-page.component
 import { SaniticeHtmlPipe } from './pipe/sanitice-html.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { EliminarTestComponent } from './dialog/eliminar-test/eliminar-test.component';
 import { IniciarTestComponent } from './dialog/iniciar-test/iniciar-test.component';
 
@@ -34,7 +35,7 @@ import { IniciarTestComponent } from './dialog/iniciar-test/iniciar-test.compone
     BrowserModule,
     AppRoutingModule,
     NgbModule, 
-    HttpClientModule, BrowserAnimationsModule, MatDialogModule
+    HttpClientModule, BrowserAnimationsModule, MatDialogModule, MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

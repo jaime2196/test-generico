@@ -23,7 +23,12 @@ export class TestComponent implements OnInit {
       id: 1,
       opcion: 'Uno'
     }],
-    solucion: [0]
+    solucion: [0],
+    estadistica: {
+      ocurrencias: 0,
+      aciertos: 0,
+      fallos: 0
+    }
   };
   subtitulo: string ='';
   constructor() { }

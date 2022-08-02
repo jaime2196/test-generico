@@ -24,7 +24,7 @@ export class InicioPageComponent implements OnInit {
 
   iniciarTest(test: TestModelo){
     this.dialog.open(IniciarTestComponent, {
-      width: '250px',
+      width: '500px',
       data: {
         dataKey: test
       }

@@ -5,6 +5,7 @@ import { Pregunta, PreguntaTipo } from 'src/app/model/Pregunta';
 import { TestModelo } from 'src/app/model/TestModelo';
 import { StorageService } from 'src/app/service/storageService';
 import * as $ from 'jquery';
+import { Estadistica } from 'src/app/model/Estadistica';
 
 @Component({
   selector: 'app-addpregunta-page',
@@ -37,6 +38,7 @@ export class AddpreguntaPageComponent implements OnInit {
       solucion: [],
       tipo: PreguntaTipo.RADIO,
       titulo: '',
+      estadistica: this.getEstadisticaVacia()
     };
     return pregunta;
   }
@@ -94,7 +96,8 @@ export class AddpreguntaPageComponent implements OnInit {
         titulo: safeTitulo,
         tipo: this.getTipoPregunta(),
         opciones: this.pregunta.opciones,
-        solucion: this.getSoluciones(this.getTipoPregunta())
+        solucion: this.getSoluciones(this.getTipoPregunta()),
+        estadistica: this.getEstadisticaVacia()
       }
       let existe=false;
       for(let i=0;i!=this.test.preguntas.length;i++){
@@ -111,6 +114,16 @@ export class AddpreguntaPageComponent implements OnInit {
       console.log(pregunta);
     }
   }
+
+  getEstadisticaVacia(): Estadistica{
+    return {
+      aciertos: 0,
+      fallos: 0,
+      ocurrencias: 0
+    };
+  }
+
+  
 
   getSoluciones(tipo: PreguntaTipo): number[]{
     let res:number[] =[]
