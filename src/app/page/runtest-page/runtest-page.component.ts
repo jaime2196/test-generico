@@ -6,6 +6,8 @@ import * as $ from 'jquery';
 import { Resultado } from 'src/app/model/Resultado';
 import { Opciones } from 'src/app/model/Opciones';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ConfiguracionTest, TestTipo } from 'src/app/model/ConfiguracionTest';
+import { Pregunta } from 'src/app/model/Pregunta';
 
 @Component({
   selector: 'app-runtest-page',
@@ -16,6 +18,7 @@ export class RuntestPageComponent implements OnInit {
 
 
   test: TestModelo= this.encontrarTest();
+  preguntas: Pregunta[]= [];
   mostrarResultado= false;
   resultados: Resultado[]=[];
 
@@ -30,6 +33,87 @@ export class RuntestPageComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(history.state.data);
+    let configTest: ConfiguracionTest = history.state.data!=null?history.state.data:{numeroPreguntas:this.test.preguntas.length,tipoTest: TestTipo.normal};
+    this.initConfigTest(configTest);
+  }
+
+  initConfigTest(configTest: ConfiguracionTest){
+    if(configTest.tipoTest==TestTipo.normal){
+      this.preguntas = this.filtrarPreguntasNumero(configTest.numeroPreguntas, this.test.preguntas );
+    }else if(configTest.tipoTest==TestTipo.aleatorio){
+      this.preguntas = this.filtrarPreguntasNumero(configTest.numeroPreguntas, this.filtrarPreguntasAleatorio(this.test.preguntas));
+    }else if(configTest.tipoTest==TestTipo.menos_falladas){
+      this.preguntas = this.filtrarPreguntasNumero(configTest.numeroPreguntas, this.fitrarPreguntasMenosfalladas(this.test.preguntas));
+    }else if(configTest.tipoTest==TestTipo.mas_falladas){
+      this.preguntas = this.filtrarPreguntasNumero(configTest.numeroPreguntas, this.fitrarPreguntasMasfalladas(this.test.preguntas));
+    }else if(configTest.tipoTest==TestTipo.mas_ocurrencias){
+      this.preguntas = this.filtrarPreguntasNumero(configTest.numeroPreguntas, this.fitrarPreguntasMasOcurrencias(this.test.preguntas));
+    }else if(configTest.tipoTest==TestTipo.menos_ocurrencias){
+      this.preguntas = this.filtrarPreguntasNumero(configTest.numeroPreguntas, this.fitrarPreguntasMenossOcurrencias(this.test.preguntas));
+    }
+  }
+
+  filtrarPreguntasNumero(numero: number, preguntas: Pregunta[]): Pregunta[]{
+    return preguntas.slice(0, numero);;
+  }
+
+  filtrarPreguntasAleatorio(preguntas: Pregunta[]): Pregunta[]{
+    let m = preguntas.length, t, i;
+    while (m) {    
+      i = Math.floor(Math.random() * m--);
+      t = preguntas[m];
+      preguntas[m] = preguntas[i];
+      preguntas[i] = t;
+    }
+    return preguntas;
+  }
+
+  fitrarPreguntasMenosfalladas(preguntas: Pregunta[]): Pregunta[]{
+    return preguntas.sort((a,b)=>{
+      if(a.estadistica.aciertos>b.estadistica.aciertos){
+        return -1;
+      }else if(a.estadistica.aciertos>b.estadistica.aciertos){
+        return 1;
+      }else{
+        return 0;
+      }
+    });
+  }
+
+  fitrarPreguntasMasfalladas(preguntas: Pregunta[]): Pregunta[]{
+    return preguntas.sort((a,b)=>{
+      if(a.estadistica.fallos>b.estadistica.fallos){
+        return 1;
+      }else if(a.estadistica.fallos>b.estadistica.fallos){
+        return -1;
+      }else{
+        return 0;
+      }
+    });
+  }
+
+  fitrarPreguntasMasOcurrencias(preguntas: Pregunta[]): Pregunta[]{
+    return preguntas.sort((a,b)=>{
+      if(a.estadistica.ocurrencias>b.estadistica.ocurrencias){
+        return -1;
+      }else if(a.estadistica.ocurrencias>b.estadistica.ocurrencias){
+        return 1;
+      }else{
+        return 0;
+      }
+    });
+  }
+
+  fitrarPreguntasMenossOcurrencias(preguntas: Pregunta[]): Pregunta[]{
+    return preguntas.sort((a,b)=>{
+      if(a.estadistica.ocurrencias>b.estadistica.ocurrencias){
+        return 1;
+      }else if(a.estadistica.ocurrencias>b.estadistica.ocurrencias){
+        return -1;
+      }else{
+        return 0;
+      }
+    });
   }
 
 
@@ -43,6 +127,7 @@ export class RuntestPageComponent implements OnInit {
   finalizarTest(){
     let res = this.obtenerResultadosTest();
     this.resultados = this.comprobarResultados(res);
+    this.setResultadosEstadisticas(this.resultados);
     this.setTextos();
     this.mostrarResultado=true;
   }
@@ -188,6 +273,22 @@ export class RuntestPageComponent implements OnInit {
       }
     }
     return res;
+  }
+
+  setResultadosEstadisticas(resultados: Resultado[]){
+    for(let i=0;i!=resultados.length;i++){
+      for(let j=0;j!=this.test.preguntas.length;j++){
+        if(resultados[i].id==this.test.preguntas[j].id){
+          this.test.preguntas[j].estadistica.ocurrencias++;
+          if(resultados[i].correcto==true){
+            this.test.preguntas[j].estadistica.aciertos++;
+          }else{
+            this.test.preguntas[j].estadistica.fallos++;
+          }
+        }
+      }
+    }
+    StorageService.setTest(this.test);
   }
 
 }

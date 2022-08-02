@@ -7,7 +7,7 @@
     <h2>{{test.subtitulo}}</h2>
     <div *ngIf="!mostrarResultado">
         <hr>
-        <app-test *ngFor="let pregunta of test.preguntas" [pregunta]="pregunta"></app-test>
+        <app-test *ngFor="let pregunta of preguntas" [pregunta]="pregunta"></app-test>
         <div class="col text-center">
             <hr>
             <button type="button" (click)="finalizarTest()" class="btn btn-primary">Finalizar test</button>
