@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
 import { TestModelo } from 'src/app/model/TestModelo';
 import { StorageService } from 'src/app/service/storageService';
+import { ToastService } from 'src/app/service/toastService';
 
 @Component({
   selector: 'app-addtest-page',
@@ -12,8 +14,10 @@ import { StorageService } from 'src/app/service/storageService';
 export class AddtestPageComponent implements OnInit {
 
   tests: TestModelo[]=[] ;
+  toast: ToastService;
 
-  constructor(private router: Router){ 
+  constructor(private router: Router, private _snackBar: MatSnackBar){ 
+    this.toast= new ToastService(_snackBar);
   }
 
   ngOnInit(): void {
@@ -67,7 +71,14 @@ export class AddtestPageComponent implements OnInit {
       fileReader.onload = (e) => {
         if (typeof fileReader.result === 'string') {
           let res = fileReader.result;
-          this.guardarEnStorage(res);
+          try{
+            let ts: TestModelo = JSON.parse(res);
+            this.guardarEnStorage(res);
+          }catch(err){
+            this.toast.mostrarToast("Imposible parsear el JSON, error: \n"+err);
+          }
+        }else{
+          this.toast.mostrarToast('No es un fichero válido');
         }
         //console.log(fileReader.result);
       }

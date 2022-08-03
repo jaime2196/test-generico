@@ -160,15 +160,15 @@ export class RuntestPageComponent implements OnInit {
   obtenerResultadosTest(): Resultado[]{
     let resultados: Resultado[]=[];
     let resultado:Resultado;
-    for(let i=0;i!=this.test.preguntas.length;i++){
+    for(let i=0;i!=this.preguntas.length;i++){
       resultado={
         id: this.test.preguntas[i].id,
         solucion:[],
         correcto: false,
       }
-      for(let j=0;j!= this.test.preguntas[i].opciones.length;j++){
-        let a = this.test.preguntas[i].id;
-        let b =this.test.preguntas[i].opciones[j].id;
+      for(let j=0;j!= this.preguntas[i].opciones.length;j++){
+        let a = this.preguntas[i].id;
+        let b =this.preguntas[i].opciones[j].id;
         let elemento = $(`#${a}-${b}`);
         if(elemento.is(':checked')){
           let res = elemento.val();
@@ -184,10 +184,10 @@ export class RuntestPageComponent implements OnInit {
 
   comprobarResultados(resultados: Resultado[]): Resultado[]{
     let res: Resultado[]=[];
-    for(let i=0;i!=this.test.preguntas.length;i++){
+    for(let i=0;i!=this.preguntas.length;i++){
       for(let j=0;j!=resultados.length;j++){
-        if(this.test.preguntas[i].id==resultados[j].id){
-          let arSolucion = this.test.preguntas[i].solucion;
+        if(this.preguntas[i].id==resultados[j].id){
+          let arSolucion = this.preguntas[i].solucion;
           let arResultado = resultados[j].solucion;
           let mal =false;
           for(let k=0;k!=arSolucion.length;k++){
@@ -196,10 +196,10 @@ export class RuntestPageComponent implements OnInit {
             }
           }
           if(mal || arResultado.length!=arSolucion.length){
-            console.log(`La pregunta ${this.test.preguntas[i].id} esta mal`);
+            console.log(`La pregunta ${this.preguntas[i].id} esta mal`);
             resultados[j].correcto=false;
           }else if(!mal && arResultado.length==arSolucion.length){
-            console.log(`La pregunta ${this.test.preguntas[i].id} esta bien`);
+            console.log(`La pregunta ${this.preguntas[i].id} esta bien`);
             resultados[j].correcto=true;
           }
           res.push(resultados[j]);

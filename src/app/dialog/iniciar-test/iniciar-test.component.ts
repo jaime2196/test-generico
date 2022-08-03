@@ -6,6 +6,7 @@ import { EliminarTestComponent } from '../eliminar-test/eliminar-test.component'
 import * as $ from 'jquery';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfiguracionTest, TestTipo } from 'src/app/model/ConfiguracionTest';
+import { ToastService } from 'src/app/service/toastService';
 
 @Component({
   selector: 'app-iniciar-test',
@@ -15,10 +16,11 @@ export class IniciarTestComponent implements OnInit {
 
   test: TestModelo=this.data.dataKey;
   tipoDeTests=TestTipo;
+  toast: ToastService;
 
   constructor(public dialogRef: MatDialogRef<EliminarTestComponent>, private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any, private _snackBar: MatSnackBar) { 
-    
+      this.toast= new ToastService(_snackBar);
     }
 
   ngOnInit(): void {
@@ -42,17 +44,17 @@ export class IniciarTestComponent implements OnInit {
     let npreguntasSafe= npreguntas==undefined?'-1':npreguntas.toString();
     let npreguntasInt=parseInt(npreguntasSafe);
     if(isNaN(npreguntasInt)||npreguntasInt==-1){
-      this.mostrarToast('Numero no valido');
+      this.toast.mostrarToast('Numero no valido');
       return false;
     }
     if(npreguntasInt<1 || npreguntasInt>this.test.preguntas.length){
-      this.mostrarToast('Numero no valido');
+      this.toast.mostrarToast('Numero no valido');
       return false;
     }
 
     let tipoTest = $('input[name="tipo-test"]:checked').val();
     if(tipoTest==undefined){
-      this.mostrarToast('Selecciona un tipo de test');
+      this.toast.mostrarToast('Selecciona un tipo de test');
       return false;
     }
 
@@ -87,11 +89,5 @@ export class IniciarTestComponent implements OnInit {
     return config;
   }
 
-
-
-  mostrarToast(msg: string){
-    this._snackBar.open(msg, 'Cerrar');
-    console.log(msg)
-  }
 
 }
