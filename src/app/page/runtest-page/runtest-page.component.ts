@@ -155,7 +155,7 @@ export class RuntestPageComponent implements OnInit {
 
   setTextoEstadisticas(){
     let porcentaje = (this.getAciertos().length*100)/this.test.preguntas.length;
-    let res = `<div>El test tiene ${this.test.preguntas.length} preguntas <br>`;
+    let res = `<div>El test tiene ${this.preguntas.length} preguntas <br>`;
     res = res + `Has acertado ${this.getAciertos().length} <br>`
     res = res + `Has fallado ${this.getFallos().length} <br>`
     res = res + `Porcentaje: ${porcentaje.toFixed(2)}%</div>`
