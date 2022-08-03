@@ -3,8 +3,11 @@
 </div>
 
 <div *ngIf="test.id != -1">
-    <h1>{{test.titulo}}</h1>
-    <h2>{{test.subtitulo}}</h2>
+    <h3>{{test.titulo}}</h3>
+    <h5>{{test.subtitulo}}</h5>
+    <h6>Orden de las preguntas: {{textoConfig1}}</h6>
+    <h6>{{textoConfig2}} preguntas</h6>
+
     <div *ngIf="!mostrarResultado">
         <hr>
         <app-test *ngFor="let pregunta of preguntas" [pregunta]="pregunta"></app-test>

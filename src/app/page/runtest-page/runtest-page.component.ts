@@ -29,6 +29,9 @@ export class RuntestPageComponent implements OnInit {
   textoEstadisticas='';
   textoEstadisticasSafe: SafeHtml='';
 
+  textoConfig1 = 'Cargando...';
+  textoConfig2 = 'Cargando...';
+
   constructor(private router: Router, private domSanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
@@ -38,6 +41,8 @@ export class RuntestPageComponent implements OnInit {
   }
 
   initConfigTest(configTest: ConfiguracionTest){
+    this.textoConfig1 = configTest.tipoTest.toLowerCase();
+    this.textoConfig2 = configTest.numeroPreguntas.toString();
     if(configTest.tipoTest==TestTipo.normal){
       this.preguntas = this.filtrarPreguntasNumero(configTest.numeroPreguntas, this.test.preguntas );
     }else if(configTest.tipoTest==TestTipo.aleatorio){
@@ -70,10 +75,10 @@ export class RuntestPageComponent implements OnInit {
 
   fitrarPreguntasMenosfalladas(preguntas: Pregunta[]): Pregunta[]{
     return preguntas.sort((a,b)=>{
-      if(a.estadistica.aciertos>b.estadistica.aciertos){
-        return -1;
-      }else if(a.estadistica.aciertos>b.estadistica.aciertos){
+      if(a.estadistica.fallos>b.estadistica.fallos){
         return 1;
+      }else if(a.estadistica.fallos<b.estadistica.fallos){
+        return -1
       }else{
         return 0;
       }
@@ -83,9 +88,9 @@ export class RuntestPageComponent implements OnInit {
   fitrarPreguntasMasfalladas(preguntas: Pregunta[]): Pregunta[]{
     return preguntas.sort((a,b)=>{
       if(a.estadistica.fallos>b.estadistica.fallos){
-        return 1;
-      }else if(a.estadistica.fallos>b.estadistica.fallos){
         return -1;
+      }else if(a.estadistica.fallos<b.estadistica.fallos){
+        return 1
       }else{
         return 0;
       }
@@ -96,8 +101,8 @@ export class RuntestPageComponent implements OnInit {
     return preguntas.sort((a,b)=>{
       if(a.estadistica.ocurrencias>b.estadistica.ocurrencias){
         return -1;
-      }else if(a.estadistica.ocurrencias>b.estadistica.ocurrencias){
-        return 1;
+      }else if(a.estadistica.ocurrencias<b.estadistica.ocurrencias){
+        return 1
       }else{
         return 0;
       }
@@ -108,8 +113,8 @@ export class RuntestPageComponent implements OnInit {
     return preguntas.sort((a,b)=>{
       if(a.estadistica.ocurrencias>b.estadistica.ocurrencias){
         return 1;
-      }else if(a.estadistica.ocurrencias>b.estadistica.ocurrencias){
-        return -1;
+      }else if(a.estadistica.ocurrencias<b.estadistica.ocurrencias){
+        return -1
       }else{
         return 0;
       }

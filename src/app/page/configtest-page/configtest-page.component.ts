@@ -45,7 +45,7 @@ export class TestPageComponent implements OnInit {
 
   eliminarTest(){
     this.dialog.open(EliminarTestComponent, {
-      width: '250px',
+      width: '400px',
       data: {
         dataKey: this.test
       }

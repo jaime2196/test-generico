@@ -41,6 +41,7 @@ export class AddtestPageComponent implements OnInit {
     StorageService.setTest(nuevoTest);
     this.tests = StorageService.initTests();
     console.log('Guardado con exito')
+    this.router.navigate(['/']);
   }
 
   getSiguienteId(): number{
