@@ -32,6 +32,9 @@ export class RuntestPageComponent implements OnInit {
   textoConfig1 = 'Cargando...';
   textoConfig2 = 'Cargando...';
 
+  mostrarAciertos=false;
+  mostrarFallos=false;
+
   constructor(private router: Router, private domSanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
@@ -158,7 +161,7 @@ export class RuntestPageComponent implements OnInit {
     let res = `<div>El test tiene ${this.preguntas.length} preguntas <br>`;
     res = res + `Has acertado ${this.getAciertos().length} <br>`
     res = res + `Has fallado ${this.getFallos().length} <br>`
-    res = res + `Porcentaje: ${porcentaje.toFixed(2)}%</div>`
+    res = res + `Porcentaje de aciertos: ${porcentaje.toFixed(2)}%</div>`
     this.textoEstadisticasSafe = this.domSanitizer.bypassSecurityTrustHtml(res);
   }
 
@@ -294,6 +297,15 @@ export class RuntestPageComponent implements OnInit {
       }
     }
     StorageService.setTest(this.test);
+  }
+
+
+  togleResultado(resultado: string){
+    if(resultado=='aciertos'){
+      this.mostrarAciertos=!this.mostrarAciertos;
+    }else if(resultado=='fallos'){
+      this.mostrarFallos=!this.mostrarFallos;
+    }
   }
 
 }

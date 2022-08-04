@@ -25,13 +25,13 @@
         <div [innerHTML]="textoEstadisticasSafe"></div>
         <br>
         <div *ngIf="getAciertos().length>=1">
-            <h5 class="text-success">Aciertos ({{getAciertos().length}})</h5>
-            <div [innerHTML]="textoAciertosSafe"></div>
+            <h5 class="text-success" (click)="togleResultado('aciertos')">Aciertos ({{getAciertos().length}})</h5>
+            <div *ngIf="mostrarAciertos" [innerHTML]="textoAciertosSafe"></div>
             <br><br>
         </div>
         <div *ngIf="getFallos().length>=1">
-            <h5 class="text-danger">Fallos ({{getFallos().length}})</h5>
-            <div [innerHTML]="textoFallosSafe"></div>
+            <h5 class="text-danger" (click)="togleResultado('fallos')">Fallos ({{getFallos().length}})</h5>
+            <div *ngIf="mostrarFallos" [innerHTML]="textoFallosSafe"></div>
         </div>
     </div>
 </div>

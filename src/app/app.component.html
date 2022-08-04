@@ -1,22 +1,31 @@
-<div class="container">
-
-  <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Test Generico</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/nuevotest">Crear nuevo test</a>
-          </li>
-        </ul>
-      </div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-light sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Test Generico</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/nuevotest">Crear nuevo test</a>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
+<!-- Navbar -->
 
+<div class="container">
   <div class="m-4">
     <router-outlet></router-outlet>
   </div>
+  
 </div>
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted fixed-bottom">
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    <a class="text-reset" target="_blank" href="https://jaimesenoret.web.app/">Jaime Señoret</a> © 2022 
+  </div>
+</footer>
+<!-- Footer -->
