@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TestModelo } from 'src/app/model/TestModelo';
 import { StorageService } from 'src/app/service/storageService';
@@ -7,6 +7,7 @@ import { Resultado } from 'src/app/model/Resultado';
 import { Opciones } from 'src/app/model/Opciones';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ConfiguracionTest, TestTipo } from 'src/app/model/ConfiguracionTest';
+import { formatNumber } from '@angular/common';
 import { Pregunta } from 'src/app/model/Pregunta';
 
 @Component({
@@ -14,7 +15,7 @@ import { Pregunta } from 'src/app/model/Pregunta';
   templateUrl: './runtest-page.component.html',
   styleUrls: ['./runtest-page.component.css']
 })
-export class RuntestPageComponent implements OnInit {
+export class RuntestPageComponent implements OnInit, OnDestroy {
 
 
   test: TestModelo= this.encontrarTest();
@@ -35,19 +36,49 @@ export class RuntestPageComponent implements OnInit {
   mostrarAciertos=false;
   mostrarFallos=false;
 
+  segundos = 0;
+  minutos = 0;
+  interval = setInterval(()=>{
+      this.segundos++;
+      if(this.segundos==59){
+        this.segundos=0;
+        this.minutos++;
+      }
+      $('#tiempo-test').text(`Tiempo transcurrido: ${this.getTiempoFormteado()}`);
+    },1000);
+  
+
   constructor(private router: Router, private domSanitizer: DomSanitizer) { }
+
+  ngOnDestroy(): void {
+    this.pararTiempo();
+  }
+
+  pararTiempo(){
+    clearInterval(this.interval);
+    $('#pie-pagina').show();
+    $('#tiempo-test').text('')
+  }
+
+  getTiempoFormteado(): string{
+    return `${formatNumber(this.minutos, 'en-EN', '2.0')}:${formatNumber(this.segundos, 'en-EN', '2.0')}`;
+  }
 
   ngOnInit(): void {
     console.log(history.state.data);
     let configTest: ConfiguracionTest = history.state.data!=null?history.state.data:{numeroPreguntas:this.test.preguntas.length,tipoTest: TestTipo.normal};
     this.initConfigTest(configTest);
+
+    $(()=>{
+      $('#pie-pagina').hide();
+    });
   }
 
   initConfigTest(configTest: ConfiguracionTest){
     this.textoConfig1 = configTest.tipoTest.toLowerCase();
     this.textoConfig2 = configTest.numeroPreguntas.toString();
     if(configTest.tipoTest==TestTipo.normal){
-      this.preguntas = this.filtrarPreguntasNumero(configTest.numeroPreguntas, this.test.preguntas );
+      this.preguntas = this.filtrarPreguntasNumero(configTest.numeroPreguntas, this.filtrarPreguntasNormal(this.test.preguntas ));
     }else if(configTest.tipoTest==TestTipo.aleatorio){
       this.preguntas = this.filtrarPreguntasNumero(configTest.numeroPreguntas, this.filtrarPreguntasAleatorio(this.test.preguntas));
     }else if(configTest.tipoTest==TestTipo.menos_falladas){
@@ -61,6 +92,7 @@ export class RuntestPageComponent implements OnInit {
     }
   }
 
+ 
   filtrarPreguntasNumero(numero: number, preguntas: Pregunta[]): Pregunta[]{
     return preguntas.slice(0, numero);;
   }
@@ -74,6 +106,18 @@ export class RuntestPageComponent implements OnInit {
       preguntas[i] = t;
     }
     return preguntas;
+  }
+
+  filtrarPreguntasNormal(preguntas: Pregunta[]): Pregunta[]{
+    return preguntas.sort((a,b)=>{
+      if(a.id>b.id){
+        return 1;
+      }else if(a.id<b.id){
+        return -1
+      }else{
+        return 0;
+      }
+    });
   }
 
   fitrarPreguntasMenosfalladas(preguntas: Pregunta[]): Pregunta[]{
@@ -138,6 +182,7 @@ export class RuntestPageComponent implements OnInit {
     this.setResultadosEstadisticas(this.resultados);
     this.setTextos();
     this.mostrarResultado=true;
+    this.pararTiempo();
   }
 
 
@@ -158,10 +203,14 @@ export class RuntestPageComponent implements OnInit {
 
   setTextoEstadisticas(){
     let porcentaje = (this.getAciertos().length*100)/this.test.preguntas.length;
-    let res = `<div>El test tiene ${this.preguntas.length} preguntas <br>`;
-    res = res + `Has acertado ${this.getAciertos().length} <br>`
-    res = res + `Has fallado ${this.getFallos().length} <br>`
-    res = res + `Porcentaje de aciertos: ${porcentaje.toFixed(2)}%</div>`
+    let res = `<div>El test tiene ${this.preguntas.length} preguntas:<br>`;
+    res = res + '<ul  class="list-group">'
+    res = res + `<li class="list-group-item">Has acertado ${this.getAciertos().length}</li>`
+    res = res + `<li class="list-group-item">Has fallado ${this.getFallos().length}</li>`
+    res = res + `<li class="list-group-item">Porcentaje de aciertos: ${porcentaje.toFixed(2)}%</li>`
+    res = res + `<li class="list-group-item"> Has tardado  ${this.getTiempoFormteado()}</li>`;
+    res = res + '</ul>'
+    res = res + '</div>'
     this.textoEstadisticasSafe = this.domSanitizer.bypassSecurityTrustHtml(res);
   }
 

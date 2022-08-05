@@ -18,13 +18,20 @@ export class IniciarTestComponent implements OnInit {
   tipoDeTests=TestTipo;
   toast: ToastService;
 
+
   constructor(public dialogRef: MatDialogRef<EliminarTestComponent>, private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any, private _snackBar: MatSnackBar) { 
       this.toast= new ToastService(_snackBar);
     }
 
   ngOnInit(): void {
-    
+    this.initCheckBox();
+  }
+
+  initCheckBox(){
+    $(()=>{
+      $('#aleatorio').prop("checked", true);
+    });
   }
 
 
