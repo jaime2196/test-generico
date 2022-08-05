@@ -17,6 +17,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { EliminarTestComponent } from './dialog/eliminar-test/eliminar-test.component';
 import { IniciarTestComponent } from './dialog/iniciar-test/iniciar-test.component';
+import { MatButtonModule } from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { IniciarTestComponent } from './dialog/iniciar-test/iniciar-test.compone
     BrowserModule,
     AppRoutingModule,
     NgbModule, 
-    HttpClientModule, BrowserAnimationsModule, MatDialogModule, MatSnackBarModule
+    HttpClientModule, BrowserAnimationsModule, 
+    MatDialogModule, MatSnackBarModule, 
+    MatButtonModule, MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

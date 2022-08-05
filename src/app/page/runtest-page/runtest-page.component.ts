@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TestModelo } from 'src/app/model/TestModelo';
 import { StorageService } from 'src/app/service/storageService';
@@ -7,7 +7,7 @@ import { Resultado } from 'src/app/model/Resultado';
 import { Opciones } from 'src/app/model/Opciones';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ConfiguracionTest, TestTipo } from 'src/app/model/ConfiguracionTest';
-import { formatNumber } from '@angular/common';
+import { formatNumber, ViewportScroller } from '@angular/common';
 import { Pregunta } from 'src/app/model/Pregunta';
 
 @Component({
@@ -46,13 +46,24 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
       }
       $('#tiempo-test').text(`Tiempo transcurrido: ${this.getTiempoFormteado()}`);
     },1000);
-  
 
-  constructor(private router: Router, private domSanitizer: DomSanitizer) { }
+
+  pageYoffset=0;
+  @HostListener('window:scroll', ['$event']) onScroll(event:any){
+    this.pageYoffset = window.pageYOffset;
+  }
+
+
+  constructor(private router: Router, private domSanitizer: DomSanitizer, private scroll: ViewportScroller) { }
 
   ngOnDestroy(): void {
     this.pararTiempo();
   }
+
+
+  scrollToTop(){
+    this.scroll.scrollToPosition([0,0]);
+}
 
   pararTiempo(){
     clearInterval(this.interval);
@@ -267,18 +278,21 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
   }
 
   procesarResultado(resultado: Resultado): string{
-    let res=`<p>${resultado.id} - ${this.getTituloPregunta(resultado.id)}</p>`;
+    //let res=`<p>${resultado.id} - ${this.getTituloPregunta(resultado.id)}</p>`;
+    let res =`<div class="card m-4" >
+    <div class="card-body">
+    <h5 class="card-title">${resultado.id} - ${this.getTituloPregunta(resultado.id)}</h5>`;
     let opciones = this.getOpcionesPregunta(resultado.id);
     let solucion = this.getSolucionPregunta(resultado.id);
     for(let i=0;i!=opciones.length;i++){
       let checked = resultado.solucion.includes(opciones[i].id);
       let esCorrecto = solucion.includes(opciones[i].id)
-      res = res +`<input class="form-check-input" type="checkbox" disabled ${checked?'checked':''}>
+      res = res +`<div class="form-check"><input class="form-check-input" type="checkbox" disabled ${checked?'checked':''}>
       <label class="form-check-label">
           ${opciones[i].opcion} ${checked && esCorrecto?'✔️':''} ${!checked && esCorrecto?'✔️':'' } ${checked && !esCorrecto?'❌':''}
-      </label> <br>`;
+      </label></div>`;
     }
-    
+    res = res + '</div></div>';
     return res;
   }
 

@@ -14,6 +14,7 @@
         <div class="col text-center">
             <hr>
             <button type="button" (click)="finalizarTest()" class="btn btn-primary">Finalizar test</button>
+            
         </div>
     </div>
     <!-- Guardar -->
@@ -24,6 +25,8 @@
         <h5 class="text-info">Estadisticas</h5>
         <div [innerHTML]="textoEstadisticasSafe"></div>
         <br>
+    </div>
+    <div *ngIf="mostrarResultado" class="col mx-auto ">
         <div *ngIf="getAciertos().length>=1">
             <h5 class="text-success" (click)="togleResultado('aciertos')">Aciertos ({{getAciertos().length}})</h5>
             <div *ngIf="mostrarAciertos" [innerHTML]="textoAciertosSafe"></div>
@@ -35,3 +38,6 @@
         </div>
     </div>
 </div>
+<!--<button mat-fab color="primary" aria-label="Example icon button with a delete icon">
+    <mat-icon>delete</mat-icon>
+</button>-->
