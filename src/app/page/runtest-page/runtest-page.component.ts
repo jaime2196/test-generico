@@ -51,6 +51,7 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
   pageYoffset=0;
   @HostListener('window:scroll', ['$event']) onScroll(event:any){
     this.pageYoffset = window.pageYOffset;
+    
   }
 
 

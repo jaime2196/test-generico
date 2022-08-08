@@ -20,7 +20,7 @@
     <!-- Guardar -->
 
     <br>
-    <div *ngIf="mostrarResultado" class="col-3 mx-auto text-center">
+    <div *ngIf="mostrarResultado" class="col-5 mx-auto text-center">
         <h4>Resultados</h4>
         <h5 class="text-info">Estadisticas</h5>
         <div [innerHTML]="textoEstadisticasSafe"></div>
@@ -28,16 +28,16 @@
     </div>
     <div *ngIf="mostrarResultado" class="col mx-auto ">
         <div *ngIf="getAciertos().length>=1">
-            <h5 class="text-success" (click)="togleResultado('aciertos')">Aciertos ({{getAciertos().length}})</h5>
+            <h5 style="cursor: pointer;" class="text-success" (click)="togleResultado('aciertos')">Aciertos ({{getAciertos().length}})</h5>
             <div *ngIf="mostrarAciertos" [innerHTML]="textoAciertosSafe"></div>
             <br><br>
         </div>
         <div *ngIf="getFallos().length>=1">
-            <h5 class="text-danger" (click)="togleResultado('fallos')">Fallos ({{getFallos().length}})</h5>
+            <h5 style="cursor: pointer;" class="text-danger" (click)="togleResultado('fallos')">Fallos ({{getFallos().length}})</h5>
             <div *ngIf="mostrarFallos" [innerHTML]="textoFallosSafe"></div>
         </div>
     </div>
 </div>
-<!--<button mat-fab color="primary" aria-label="Example icon button with a delete icon">
-    <mat-icon>delete</mat-icon>
-</button>-->
+<button *ngIf="pageYoffset>100" id="backtop" mat-fab color="primary" (click)="scrollToTop()" aria-label="Example icon button with a delete icon">
+    <mat-icon>arrow_upward</mat-icon>
+</button>
