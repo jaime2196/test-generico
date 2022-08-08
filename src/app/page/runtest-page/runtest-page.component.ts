@@ -9,11 +9,35 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ConfiguracionTest, TestTipo } from 'src/app/model/ConfiguracionTest';
 import { formatNumber, ViewportScroller } from '@angular/common';
 import { Pregunta } from 'src/app/model/Pregunta';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-runtest-page',
   templateUrl: './runtest-page.component.html',
-  styleUrls: ['./runtest-page.component.css']
+  styleUrls: ['./runtest-page.component.css'], 
+  animations: [
+    trigger(
+      'inOutAnimation', 
+      [
+        transition(
+          ':enter', 
+          [
+            style({  opacity: 0 }),
+            animate(500, 
+                    style({ opacity: 1 }))
+          ]
+        ),
+        transition(
+          ':leave', 
+          [
+            style({  opacity: 1 }),
+            animate(500, 
+                    style({ opacity: 0 }))
+          ]
+        )
+      ]
+    )
+  ]
 })
 export class RuntestPageComponent implements OnInit, OnDestroy {
 

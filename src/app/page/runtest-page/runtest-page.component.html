@@ -38,6 +38,6 @@
         </div>
     </div>
 </div>
-<button *ngIf="pageYoffset>100" id="backtop" mat-fab color="primary" (click)="scrollToTop()" aria-label="Example icon button with a delete icon">
+<button [@inOutAnimation] *ngIf="pageYoffset>100" id="backtop" mat-fab color="primary" (click)="scrollToTop()" aria-label="Example icon button with a delete icon">
     <mat-icon>arrow_upward</mat-icon>
 </button>
