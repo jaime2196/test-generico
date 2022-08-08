@@ -2,3 +2,18 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* SnackBar */
+.mat-snack-bar-container{
+    margin: 100px !important;
+}
+
+.mat-simple-snackbar-action {
+    color: #0d6efd;
+}
+
+
+.puntero{
+    cursor: pointer;
+}

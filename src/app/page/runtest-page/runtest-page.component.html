@@ -20,21 +20,21 @@
     <!-- Guardar -->
 
     <br>
-    <div *ngIf="mostrarResultado" class="col-5 mx-auto text-center">
+    <div [@inOutAnimation] *ngIf="mostrarResultado" class="col-5 mx-auto text-center">
         <h4>Resultados</h4>
         <h5 class="text-info">Estadisticas</h5>
         <div [innerHTML]="textoEstadisticasSafe"></div>
         <br>
     </div>
-    <div *ngIf="mostrarResultado" class="col mx-auto ">
+    <div [@inOutAnimation] *ngIf="mostrarResultado" class="col mx-auto ">
         <div *ngIf="getAciertos().length>=1">
-            <h5 style="cursor: pointer;" class="text-success" (click)="togleResultado('aciertos')">Aciertos ({{getAciertos().length}})</h5>
-            <div *ngIf="mostrarAciertos" [innerHTML]="textoAciertosSafe"></div>
+            <h5 class="text-success puntero" (click)="togleResultado('aciertos')">Aciertos ({{getAciertos().length}})</h5>
+            <div [@inOutAnimation]  *ngIf="mostrarAciertos" [innerHTML]="textoAciertosSafe"></div>
             <br><br>
         </div>
         <div *ngIf="getFallos().length>=1">
-            <h5 style="cursor: pointer;" class="text-danger" (click)="togleResultado('fallos')">Fallos ({{getFallos().length}})</h5>
-            <div *ngIf="mostrarFallos" [innerHTML]="textoFallosSafe"></div>
+            <h5 class="text-danger puntero" (click)="togleResultado('fallos')">Fallos ({{getFallos().length}})</h5>
+            <div [@inOutAnimation]  *ngIf="mostrarFallos" [innerHTML]="textoFallosSafe"></div>
         </div>
     </div>
 </div>

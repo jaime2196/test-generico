@@ -47,15 +47,16 @@ export class IniciarTestComponent implements OnInit {
   }
 
   validar(): boolean{
+    let nInvalido = 'El número de preguntas no es válido';
     let npreguntas = $('#npreguntas').val();
     let npreguntasSafe= npreguntas==undefined?'-1':npreguntas.toString();
     let npreguntasInt=parseInt(npreguntasSafe);
     if(isNaN(npreguntasInt)||npreguntasInt==-1){
-      this.toast.mostrarToast('Numero no valido');
+      this.toast.mostrarToast(nInvalido);
       return false;
     }
     if(npreguntasInt<1 || npreguntasInt>this.test.preguntas.length){
-      this.toast.mostrarToast('Numero no valido');
+      this.toast.mostrarToast(nInvalido);
       return false;
     }
 
