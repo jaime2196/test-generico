@@ -1,0 +1,15 @@
+<div class="col">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Buscar pregunta</span>
+        </div>
+        <input (keyup)="registrarEvento()" type="text" id="buscador" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+</div>
+<br>
+<div>
+    
+    <app-test *ngFor="let pregunta of preguntasMostrar" [pregunta]="pregunta" [mostrarRespCorrecta]="true"></app-test>
+    <hr>
+    
+</div>

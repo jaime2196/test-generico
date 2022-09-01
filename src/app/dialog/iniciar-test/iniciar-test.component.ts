@@ -19,7 +19,7 @@ export class IniciarTestComponent implements OnInit {
   toast: ToastService;
 
 
-  constructor(public dialogRef: MatDialogRef<EliminarTestComponent>, private router: Router,
+  constructor(public dialogRef: MatDialogRef<IniciarTestComponent>, private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any, private _snackBar: MatSnackBar) { 
       this.toast= new ToastService(_snackBar);
     }

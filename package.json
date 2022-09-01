@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "bot": "ng g c dialog/iniciarTest",
+    "bot": "ng g c page/verRespuestasPage",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
