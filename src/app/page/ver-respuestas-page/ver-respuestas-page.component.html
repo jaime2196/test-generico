@@ -1,15 +1,17 @@
 <div class="col">
+    <h3>Buscador de respuestas</h3>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">Buscar pregunta</span>
         </div>
         <input (keyup)="registrarEvento()" type="text" id="buscador" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
     </div>
+    <p>Mostrando {{preguntasMostrar.length}} preguntas de {{preguntas.length}}</p>
 </div>
 <br>
 <div>
     
-    <app-test *ngFor="let pregunta of preguntasMostrar" [pregunta]="pregunta" [mostrarRespCorrecta]="true"></app-test>
+    <app-test *ngFor="let pregunta of preguntasMostrar" [pregunta]="pregunta"></app-test>
     <hr>
     
 </div>

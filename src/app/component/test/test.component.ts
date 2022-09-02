@@ -30,13 +30,11 @@ export class TestComponent implements OnInit {
       fallos: 0
     }
   };
-  @Input() mostrarRespCorrecta = false;
   subtitulo: string ='';
   constructor() { }
 
   ngOnInit(): void {
     this.setSubtitulo();
-    this.mostrarRespuestaCorrecta();
   }
 
   setSubtitulo(){
@@ -45,16 +43,6 @@ export class TestComponent implements OnInit {
       let inicio = titulo.lastIndexOf('(');
       this.subtitulo =titulo.substring(inicio);
       this.pregunta.titulo = this.pregunta.titulo.substring(0,inicio);
-    }
-  }
-
-  mostrarRespuestaCorrecta(){
-    if(this.mostrarRespCorrecta){
-      for(let i=0;i!=this.pregunta.opciones.length;i++){
-        if(this.pregunta.solucion.includes(this.pregunta.opciones[i].id)){
-          this.pregunta.opciones[i].opcion = '✔️✔️ '+this.pregunta.opciones[i].opcion+' ✔️✔️';
-        }
-      }
     }
   }
 }
