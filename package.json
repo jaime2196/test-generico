@@ -7,6 +7,7 @@
     "build": "ng build",
     "bot": "ng g c page/verRespuestasPage",
     "watch": "ng build --watch --configuration development",
+    "update": "ng update @angular/core@15 @angular/cli@15",
     "test": "ng test"
   },
   "private": true,
