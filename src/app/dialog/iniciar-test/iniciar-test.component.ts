@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MatDialogRef , MAT_DIALOG_DATA  } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TestModelo } from 'src/app/model/TestModelo';
 import { EliminarTestComponent } from '../eliminar-test/eliminar-test.component';
 import * as $ from 'jquery';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfiguracionTest, TestTipo } from 'src/app/model/ConfiguracionTest';
 import { ToastService } from 'src/app/service/toastService';
 
