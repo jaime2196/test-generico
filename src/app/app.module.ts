@@ -13,11 +13,11 @@ import { AddtestPageComponent } from './page/addtest-page/addtest-page.component
 import { RuntestPageComponent } from './page/runtest-page/runtest-page.component';
 import { SaniticeHtmlPipe } from './pipe/sanitice-html.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule , MatDialogRef  } from '@angular/material/dialog';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatLegacyDialogModule as MatDialogModule , MatLegacyDialogRef as MatDialogRef  } from '@angular/material/legacy-dialog';
+import {MatLegacySnackBarModule as MatSnackBarModule} from '@angular/material/legacy-snack-bar';
 import { EliminarTestComponent } from './dialog/eliminar-test/eliminar-test.component';
 import { IniciarTestComponent } from './dialog/iniciar-test/iniciar-test.component';
-import { MatButtonModule } from '@angular/material/button';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import {MatIconModule} from '@angular/material/icon';
 import { VerRespuestasComponent } from './dialog/ver-respuestas/ver-respuestas.component';
 import { VerRespuestasPageComponent } from './page/ver-respuestas-page/ver-respuestas-page.component';
