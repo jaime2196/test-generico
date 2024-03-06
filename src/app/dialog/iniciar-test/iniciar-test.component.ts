@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef , MAT_DIALOG_DATA  } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TestModelo } from 'src/app/model/TestModelo';
-import { EliminarTestComponent } from '../eliminar-test/eliminar-test.component';
 import * as $ from 'jquery';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfiguracionTest, TestTipo } from 'src/app/model/ConfiguracionTest';

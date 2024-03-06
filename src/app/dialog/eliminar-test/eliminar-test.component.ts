@@ -1,7 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef as MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA  } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import {MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StorageService } from 'src/app/service/storageService';
 
 

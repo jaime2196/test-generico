@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog as MatDialog } from '@angular/material/dialog';
-import { MatSnackBar as MatSnackBar } from '@angular/material/snack-bar';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { IniciarTestComponent } from 'src/app/dialog/iniciar-test/iniciar-test.component';
 import { TestModelo } from 'src/app/model/TestModelo';
 import { StorageService } from 'src/app/service/storageService';
@@ -8,20 +8,15 @@ import { ToastService } from 'src/app/service/toastService';
 
 @Component({
   selector: 'app-inicio-page',
-  templateUrl: './inicio-page.component.html',
-  styleUrls: ['./inicio-page.component.css']
+  templateUrl: './inicio-page.component.html'
 })
-export class InicioPageComponent implements OnInit {
+export class InicioPageComponent {
 
   tests: TestModelo[] = StorageService.initTests();
   toast: ToastService;
 
   constructor(public dialog: MatDialog, private _snackBar: MatSnackBar) {
     this.toast= new ToastService(_snackBar);
-  }
-
-  ngOnInit(): void {
-    
   }
 
 

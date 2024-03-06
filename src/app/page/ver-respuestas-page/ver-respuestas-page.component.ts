@@ -6,8 +6,7 @@ import * as $ from 'jquery';
 
 @Component({
   selector: 'app-ver-respuestas-page',
-  templateUrl: './ver-respuestas-page.component.html',
-  styleUrls: ['./ver-respuestas-page.component.css']
+  templateUrl: './ver-respuestas-page.component.html'
 })
 export class VerRespuestasPageComponent implements OnInit {
 
@@ -18,7 +17,7 @@ export class VerRespuestasPageComponent implements OnInit {
   constructor(private router : Router) { }
 
   ngOnInit(): void {
-    let idTests: string[] = history.state.data!=null?history.state.data:[];
+    let idTests: string[] = history.state.data ?? [];
     if(idTests.length==0){
       this.router.navigate(['/']);
     }else{
@@ -28,12 +27,12 @@ export class VerRespuestasPageComponent implements OnInit {
 
 
   initTests(idTests: string[]){
-    for(let i=0;i!=idTests.length;i++){
+    for(let i=0;i<=idTests.length;i++){
      this.preguntas = this.preguntas.concat(StorageService.getTest(idTests[i]).preguntas);
     }
 
-    for(let j=0;j!=this.preguntas.length;j++){
-      for(let i=0;i!=this.preguntas[j].opciones.length;i++){
+    for(let j=0;j<=this.preguntas.length;j++){
+      for(let i=0;i<=this.preguntas[j].opciones.length;i++){
         if(this.preguntas[j].solucion.includes(this.preguntas[j].opciones[i].id)){
           this.preguntas[j].opciones[i].opcion = '✔️✔️ '+this.preguntas[j].opciones[i].opcion+' ✔️✔️';
         }
@@ -58,7 +57,7 @@ export class VerRespuestasPageComponent implements OnInit {
         if(this.preguntas[j].titulo.toLowerCase().includes(texto)){
           this.preguntasMostrar.push(this.preguntas[j]);
         }else{
-          for(let i =0;i!=this.preguntas[j].opciones.length;i++){
+          for(let i =0;i<=this.preguntas[j].opciones.length;i++){
             let opcion = this.preguntas[j].opciones[i].opcion.toLowerCase();
             if(opcion.includes(texto)){
               this.preguntasMostrar.push(this.preguntas[j]);

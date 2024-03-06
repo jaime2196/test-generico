@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef , MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar as MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TestModelo } from 'src/app/model/TestModelo';
 import { StorageService } from 'src/app/service/storageService';
@@ -41,7 +41,7 @@ export class VerRespuestasComponent implements OnInit {
     }
   }
 
-  validar(tests: String[]): boolean{
+  validar(tests: string[]): boolean{
     if(this.tests.length == 0){
       return false;
     }
@@ -49,13 +49,13 @@ export class VerRespuestasComponent implements OnInit {
     return true;
   }
 
-  getTestSelecionados(): String[]{
-    let res: String[] = [];
+  getTestSelecionados(): string[]{
+    let res: string[] = [];
     let checks=$('.check-opciones');
-    for(let i=0;i!=checks.length;i++){
+    for(let i=0;i<=checks.length;i++){
       if($(checks[i]).is(':checked')){
         let valor = checks[i].getAttribute('value');
-        let safeValor = valor == null? '':valor;
+        let safeValor = valor ?? '';
         res.push(safeValor);
       }
     }

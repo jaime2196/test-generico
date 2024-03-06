@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "http://localhost:9000",
+        "projectKey": "jaime2196_test-generico_fc456f4a-627b-44ce-974c-e781fc96a996"
+    }
+}

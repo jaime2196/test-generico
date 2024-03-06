@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Opciones } from 'src/app/model/Opciones';
 import { Pregunta, PreguntaTipo } from 'src/app/model/Pregunta';
@@ -9,10 +9,9 @@ import { Estadistica } from 'src/app/model/Estadistica';
 
 @Component({
   selector: 'app-addpregunta-page',
-  templateUrl: './addpregunta-page.component.html',
-  styleUrls: ['./addpregunta-page.component.css']
+  templateUrl: './addpregunta-page.component.html'
 })
-export class AddpreguntaPageComponent implements OnInit {
+export class AddpreguntaPageComponent {
 
   test: TestModelo = this.encontrarTest();
   pregunta: Pregunta = this.getPregunta();
@@ -22,8 +21,6 @@ export class AddpreguntaPageComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
-  }
 
   encontrarTest(): TestModelo{
     let url = this.router.url;
@@ -57,7 +54,7 @@ export class AddpreguntaPageComponent implements OnInit {
 
   getSiguienteIdOpcion(): number{
     let max = 0;
-    for(let i=0;i!=this.pregunta.opciones.length;i++){
+    for(let i=0;i<=this.pregunta.opciones.length;i++){
       if(this.pregunta.opciones[i].id>max){
         max = this.pregunta.opciones[i].id
       }
@@ -68,7 +65,7 @@ export class AddpreguntaPageComponent implements OnInit {
 
   getSiguienteIdPregunta(): number{
     let max = 0;
-    for(let i=0;i!=this.test.preguntas.length;i++){
+    for(let i=0;i<=this.test.preguntas.length;i++){
       if(this.test.preguntas[i].id>max){
         max = this.test.preguntas[i].id
       }
@@ -100,7 +97,7 @@ export class AddpreguntaPageComponent implements OnInit {
         estadistica: this.getEstadisticaVacia()
       }
       let existe=false;
-      for(let i=0;i!=this.test.preguntas.length;i++){
+      for(let i=0;i<=this.test.preguntas.length;i++){
         if(this.test.preguntas[i].titulo==pregunta.titulo){
           this.mostrarToast('La pregunta ya existe');
           existe=true;
@@ -135,7 +132,7 @@ export class AddpreguntaPageComponent implements OnInit {
       }
     }else if(tipo==PreguntaTipo.CHECK){
       let checks=$('.check-opciones');
-      for(let i=0;i!=checks.length;i++){
+      for(let i=0;i<=checks.length;i++){
         if($(checks[i]).is(':checked')){
           let valor = checks[i].getAttribute('value');
           let safeValue = valor==null?0:Number(valor);
@@ -181,14 +178,11 @@ export class AddpreguntaPageComponent implements OnInit {
       this.mostrarToast('Seleciona al menos una solucion');
       return false;
     }
-    //TODO: mas validaciones
     return true;
   }
 
   mostrarToast(msg: string){
     this.msgToast=msg;
-    /*let to:any =$('.toast')
-    to.toast('show');*/
     console.log(this.msgToast)
   }
 

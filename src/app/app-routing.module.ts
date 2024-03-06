@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { AddpreguntaPageComponent } from './page/addpregunta-page/addpregunta-page.component';
 import { AddtestPageComponent } from './page/addtest-page/addtest-page.component';
 import { InicioPageComponent } from './page/inicio-page/inicio-page.component';

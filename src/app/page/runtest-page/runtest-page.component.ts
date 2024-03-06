@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TestModelo } from 'src/app/model/TestModelo';
 import { StorageService } from 'src/app/service/storageService';
@@ -74,7 +74,7 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
 
   pageYoffset=0;
   @HostListener('window:scroll', ['$event']) onScroll(event:any){
-    this.pageYoffset = window.pageYOffset;
+    this.pageYoffset = window.scrollY;
     
   }
 
@@ -102,7 +102,7 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log(history.state.data);
-    let configTest: ConfiguracionTest = history.state.data!=null?history.state.data:{numeroPreguntas:this.test.preguntas.length,tipoTest: TestTipo.normal};
+    let configTest: ConfiguracionTest = history.state.data ?? {numeroPreguntas:this.test.preguntas.length,tipoTest: TestTipo.normal}
     this.initConfigTest(configTest);
 
     $(()=>{
@@ -224,13 +224,13 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
 
   setTextos() {
     let aciertos = this.getAciertos();
-    for(let i=0;i!=aciertos.length;i++){
+    for(let i=0;i<=aciertos.length;i++){
       this.textoAciertos= this.textoAciertos + this.procesarResultado(aciertos[i]);
     }
     this.textoAciertosSafe = this.domSanitizer.bypassSecurityTrustHtml(this.textoAciertos);
 
     let fallos = this.getFallos();
-    for(let i=0;i!=fallos.length;i++){
+    for(let i=0;i<=fallos.length;i++){
       this.textoFallos= this.textoFallos + this.procesarResultado(fallos[i]);
     }
     this.textoFallosSafe = this.domSanitizer.bypassSecurityTrustHtml(this.textoFallos);
@@ -253,13 +253,13 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
   obtenerResultadosTest(): Resultado[]{
     let resultados: Resultado[]=[];
     let resultado:Resultado;
-    for(let i=0;i!=this.preguntas.length;i++){
+    for(let i=0;i<=this.preguntas.length;i++){
       resultado={
         id: this.test.preguntas[i].id,
         solucion:[],
         correcto: false,
       }
-      for(let j=0;j!= this.preguntas[i].opciones.length;j++){
+      for(let j=0;j<= this.preguntas[i].opciones.length;j++){
         let a = this.preguntas[i].id;
         let b =this.preguntas[i].opciones[j].id;
         let elemento = $(`#${a}-${b}`);
@@ -277,13 +277,13 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
 
   comprobarResultados(resultados: Resultado[]): Resultado[]{
     let res: Resultado[]=[];
-    for(let i=0;i!=this.preguntas.length;i++){
-      for(let j=0;j!=resultados.length;j++){
+    for(let i=0;i<=this.preguntas.length;i++){
+      for(let j=0;j<=resultados.length;j++){
         if(this.preguntas[i].id==resultados[j].id){
           let arSolucion = this.preguntas[i].solucion;
           let arResultado = resultados[j].solucion;
           let mal =false;
-          for(let k=0;k!=arSolucion.length;k++){
+          for(let k=0;k<=arSolucion.length;k++){
             if(!arResultado.includes(arSolucion[k])){
               mal = true;
             }
@@ -303,13 +303,12 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
   }
 
   procesarResultado(resultado: Resultado): string{
-    //let res=`<p>${resultado.id} - ${this.getTituloPregunta(resultado.id)}</p>`;
     let res =`<div class="card m-4" >
     <div class="card-body">
     <h5 class="card-title">${resultado.id} - ${this.getTituloPregunta(resultado.id)}</h5>`;
     let opciones = this.getOpcionesPregunta(resultado.id);
     let solucion = this.getSolucionPregunta(resultado.id);
-    for(let i=0;i!=opciones.length;i++){
+    for(let i=0;i<=opciones.length;i++){
       let checked = resultado.solucion.includes(opciones[i].id);
       let esCorrecto = solucion.includes(opciones[i].id)
       res = res +`<div class="form-check"><input class="form-check-input" type="checkbox" disabled ${checked?'checked':''}>
@@ -323,7 +322,7 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
 
   getAciertos(): Resultado[]{
     let filtrado: Resultado[]=[];
-    for(let i=0;i!=this.resultados.length;i++){
+    for(let i=0;i<=this.resultados.length;i++){
       if(this.resultados[i].correcto){
         filtrado.push(this.resultados[i])
       }
@@ -333,7 +332,7 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
 
   getFallos(): Resultado[]{
     let filtrado: Resultado[]=[];
-    for(let i=0;i!=this.resultados.length;i++){
+    for(let i=0;i<=this.resultados.length;i++){
       if(!this.resultados[i].correcto){
         filtrado.push(this.resultados[i])
       }
@@ -343,7 +342,7 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
 
   getTituloPregunta(id: number):string{
     let res='';
-    for(let i=0;i!=this.test.preguntas.length;i++){
+    for(let i=0;i<=this.test.preguntas.length;i++){
       if(this.test.preguntas[i].id==id){
         res=this.test.preguntas[i].titulo;
       }
@@ -353,7 +352,7 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
 
   getOpcionesPregunta(id: number): Opciones[]{
     let res: Opciones[]=[];
-    for(let i=0;i!=this.test.preguntas.length;i++){
+    for(let i=0;i<=this.test.preguntas.length;i++){
       if(this.test.preguntas[i].id==id){
         res=this.test.preguntas[i].opciones;
       }
@@ -363,7 +362,7 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
 
   getSolucionPregunta(id: number): number[]{
     let res: number[]=[];
-    for(let i=0;i!=this.test.preguntas.length;i++){
+    for(let i=0;i<=this.test.preguntas.length;i++){
       if(this.test.preguntas[i].id==id){
         res=this.test.preguntas[i].solucion;
       }
@@ -372,11 +371,11 @@ export class RuntestPageComponent implements OnInit, OnDestroy {
   }
 
   setResultadosEstadisticas(resultados: Resultado[]){
-    for(let i=0;i!=resultados.length;i++){
-      for(let j=0;j!=this.test.preguntas.length;j++){
+    for(let i=0;i<=resultados.length;i++){
+      for(let j=0;j<=this.test.preguntas.length;j++){
         if(resultados[i].id==this.test.preguntas[j].id){
           this.test.preguntas[j].estadistica.ocurrencias++;
-          if(resultados[i].correcto==true){
+          if(resultados[i].correcto){
             this.test.preguntas[j].estadistica.aciertos++;
           }else{
             this.test.preguntas[j].estadistica.fallos++;

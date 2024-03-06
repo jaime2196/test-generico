@@ -8,8 +8,7 @@ import { ToastService } from 'src/app/service/toastService';
 
 @Component({
   selector: 'app-addtest-page',
-  templateUrl: './addtest-page.component.html',
-  styleUrls: ['./addtest-page.component.css']
+  templateUrl: './addtest-page.component.html'
 })
 export class AddtestPageComponent implements OnInit {
 
@@ -26,7 +25,6 @@ export class AddtestPageComponent implements OnInit {
 
   anadirPreguntas(){
     this.guardar();
-    // TODO: mover a la pagina de añadir preguntas
   }
 
 
@@ -37,7 +35,6 @@ export class AddtestPageComponent implements OnInit {
     let safeSub =  sub==undefined?'':sub.toString();
     let id =this.getSiguienteId();
     let nuevoTest = this.getTestModelo(safeTitulo, safeSub, id);
-    //localStorage.setItem(`TESTS-${id}`, JSON.stringify(nuevoTest));
     StorageService.setTest(nuevoTest);
     this.tests = StorageService.initTests();
     console.log('Guardado con exito')
@@ -46,7 +43,7 @@ export class AddtestPageComponent implements OnInit {
 
   getSiguienteId(): number{
     let max =0;
-    for(let i=0;i!=this.tests?.length;i++){
+    for(let i=0;i<=this.tests?.length;i++){
       if(this.tests[i].id>max){
         max = this.tests[i].id;
       }
@@ -73,7 +70,6 @@ export class AddtestPageComponent implements OnInit {
         if (typeof fileReader.result === 'string') {
           let res = fileReader.result;
           try{
-            let ts: TestModelo = JSON.parse(res);
             this.guardarEnStorage(res);
           }catch(err){
             this.toast.mostrarToast("Imposible parsear el JSON, error: \n"+err);
@@ -81,7 +77,6 @@ export class AddtestPageComponent implements OnInit {
         }else{
           this.toast.mostrarToast('No es un fichero válido');
         }
-        //console.log(fileReader.result);
       }
       fileReader.readAsText(files[0]);
     }

@@ -4,13 +4,12 @@ import { TestModelo } from 'src/app/model/TestModelo';
 import { StorageService } from 'src/app/service/storageService';
 import * as $ from 'jquery';
 import { saveAs } from 'file-saver';
-import { MatDialog as MatDialog, MatDialogRef as MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { EliminarTestComponent } from 'src/app/dialog/eliminar-test/eliminar-test.component';
 
 @Component({
   selector: 'app-test-page',
   templateUrl: './configtest-page.component.html',
-  styleUrls: ['./configtest-page.component.css']
 })
 export class TestPageComponent implements OnInit {
 
