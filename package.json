@@ -9,6 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "update": "ng update @angular/core@15 @angular/cli@15",
     "umaterial": "ng update @angular/material@15",
+    "sonar": "sonar-scanner.bat -D\"sonar.projectKey=jaime2196_test-generico_fc456f4a-627b-44ce-974c-e781fc96a996\" -D\"sonar.sources=.\" -D\"sonar.host.url=http://localhost:9000\" -D\"sonar.token=sqp_d7394ed1c3c0bee804269afccc3a208cc2cb4e38\"",
     "test": "ng test"
   },
   "private": true,
@@ -33,6 +34,7 @@
     "file-saver": "^2.0.5",
     "jquery": "^3.6.0",
     "rxjs": "~7.5.0",
+    "test-generico": "file:",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

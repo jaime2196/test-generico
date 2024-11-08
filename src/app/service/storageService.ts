@@ -17,6 +17,7 @@ export class StorageService{
     }
 
     public static getTest(id: string){
+        debugger;
         let tests = StorageService.initTests();
         let test: TestModelo ={
             id:-1,
@@ -24,7 +25,7 @@ export class StorageService{
             subtitulo: '',
             preguntas: [],
           }; 
-          for(let i=0;i<=tests.length;i++){
+          for(let i=0;i<tests.length;i++){
             if(id==tests[i].id.toString()){
               test =  tests[i];
             }

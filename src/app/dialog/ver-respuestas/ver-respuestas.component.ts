@@ -52,7 +52,7 @@ export class VerRespuestasComponent implements OnInit {
   getTestSelecionados(): string[]{
     let res: string[] = [];
     let checks=$('.check-opciones');
-    for(let i=0;i<=checks.length;i++){
+    for(let i=0;i<checks.length;i++){
       if($(checks[i]).is(':checked')){
         let valor = checks[i].getAttribute('value');
         let safeValor = valor ?? '';

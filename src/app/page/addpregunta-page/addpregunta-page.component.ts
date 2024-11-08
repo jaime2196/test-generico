@@ -54,7 +54,7 @@ export class AddpreguntaPageComponent {
 
   getSiguienteIdOpcion(): number{
     let max = 0;
-    for(let i=0;i<=this.pregunta.opciones.length;i++){
+    for(let i=0;i<this.pregunta.opciones.length;i++){
       if(this.pregunta.opciones[i].id>max){
         max = this.pregunta.opciones[i].id
       }
@@ -65,7 +65,7 @@ export class AddpreguntaPageComponent {
 
   getSiguienteIdPregunta(): number{
     let max = 0;
-    for(let i=0;i<=this.test.preguntas.length;i++){
+    for(let i=0;i<this.test.preguntas.length;i++){
       if(this.test.preguntas[i].id>max){
         max = this.test.preguntas[i].id
       }
@@ -97,7 +97,7 @@ export class AddpreguntaPageComponent {
         estadistica: this.getEstadisticaVacia()
       }
       let existe=false;
-      for(let i=0;i<=this.test.preguntas.length;i++){
+      for(let i=0;i<this.test.preguntas.length;i++){
         if(this.test.preguntas[i].titulo==pregunta.titulo){
           this.mostrarToast('La pregunta ya existe');
           existe=true;
@@ -132,7 +132,7 @@ export class AddpreguntaPageComponent {
       }
     }else if(tipo==PreguntaTipo.CHECK){
       let checks=$('.check-opciones');
-      for(let i=0;i<=checks.length;i++){
+      for(let i=0;i<checks.length;i++){
         if($(checks[i]).is(':checked')){
           let valor = checks[i].getAttribute('value');
           let safeValue = valor==null?0:Number(valor);

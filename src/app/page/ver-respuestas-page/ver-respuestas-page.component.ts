@@ -27,12 +27,12 @@ export class VerRespuestasPageComponent implements OnInit {
 
 
   initTests(idTests: string[]){
-    for(let i=0;i<=idTests.length;i++){
+    for(let i=0;i<idTests.length;i++){
      this.preguntas = this.preguntas.concat(StorageService.getTest(idTests[i]).preguntas);
     }
 
-    for(let j=0;j<=this.preguntas.length;j++){
-      for(let i=0;i<=this.preguntas[j].opciones.length;i++){
+    for(let j=0;j<this.preguntas.length;j++){
+      for(let i=0;i<this.preguntas[j].opciones.length;i++){
         if(this.preguntas[j].solucion.includes(this.preguntas[j].opciones[i].id)){
           this.preguntas[j].opciones[i].opcion = '✔️✔️ '+this.preguntas[j].opciones[i].opcion+' ✔️✔️';
         }
@@ -57,7 +57,7 @@ export class VerRespuestasPageComponent implements OnInit {
         if(this.preguntas[j].titulo.toLowerCase().includes(texto)){
           this.preguntasMostrar.push(this.preguntas[j]);
         }else{
-          for(let i =0;i<=this.preguntas[j].opciones.length;i++){
+          for(let i =0;i<this.preguntas[j].opciones.length;i++){
             let opcion = this.preguntas[j].opciones[i].opcion.toLowerCase();
             if(opcion.includes(texto)){
               this.preguntasMostrar.push(this.preguntas[j]);
